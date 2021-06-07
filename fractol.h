@@ -45,7 +45,7 @@ void		initialize_canvas(t_canvas *canvas);
 uint32_t	get_color(t_img img, int x, int y);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 uint32_t	rgb2hex(int r, int g, int b);
-uint32_t	get_hsv_hex(double h, double s, double v);
+uint32_t	hsv2hex(double h, double s, double v);
 
 // fracal
 int	draw_julia(t_canvas *canvas);

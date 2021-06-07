@@ -16,7 +16,7 @@ uint32_t	rgb2hex(int r, int g, int b)
  * s: Saturation(Chroma) [0-1]
  * v: Value(Brightness) [0-1]
  */
-uint32_t	get_hsv_hex(double h, double s, double v)
+uint32_t	hsv2hex(double h, double s, double v)
 {
 	double	c;
 	double	x;

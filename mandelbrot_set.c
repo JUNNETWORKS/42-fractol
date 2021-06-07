@@ -54,7 +54,7 @@ int	draw_mandelbrot(t_canvas *canvas)
 				color = rgb2hex(0, 0, 0);
 			else
 				// color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
-				color = get_hsv_hex(180, ((double)iteration / (double)MAX_ITERATION), ((double)iteration / (double)MAX_ITERATION));
+				color = hsv2hex(180, ((double)iteration / (double)MAX_ITERATION), ((double)iteration / (double)MAX_ITERATION));
 			my_mlx_pixel_put(&canvas->img, x, y, color);
 			x++;
 		}

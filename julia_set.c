@@ -7,5 +7,6 @@
  */
 int	draw_julia(t_canvas *canvas)
 {
+	(void)canvas;
 	return (0);
 }
