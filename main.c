@@ -25,9 +25,20 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->screen_width = max_width;
 }
 
+void update_mouse_position(t_canvas *canvas)
+{
+	int	x;
+	int	y;
+
+	mlx_mouse_get_pos(canvas->mlx, canvas->win, &x, &y);
+	canvas->mouse_x = x;
+	canvas->mouse_y = y;
+}
+
 int	main_loop(t_canvas *canvas)
 {
-	(void)canvas;
+	update_mouse_position(canvas);
+	printf("mouse: (%d, %d)\n", canvas->mouse_x, canvas->mouse_y);
 	return (0);
 }
 
@@ -48,6 +59,7 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, KeyPress, KeyPressMask, key_press_hook, &canvas);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
+	mlx_mouse_hook(canvas.win, mouse_hook, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);
 	mlx_loop(canvas.mlx);
 }
