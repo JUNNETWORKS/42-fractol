@@ -23,24 +23,23 @@ int	draw_julia(t_canvas *canvas)
 	double	cy;
 	int	iteration;
 
-	R = 2;
-	cx = -0.3;
-	cy = -0.63;
-
+	R = 4;
 	y = 0;
 	while (y < canvas->screen_height)
 	{
-		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
-			printf("Z=%+f%+fi\n", zx, zy);
+			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			// printf("Z=%+f%+fi\n", cy, cx);
 
 			iteration = 0;
+			zx = 0;
+			zy = 0;
 			while (zx * zx + zy * zy < (R * R) && iteration < MAX_ITERATION)
 			{
-				printf("%d: (%f,%f)\n", iteration, zx, zy);
+				// printf("%d: (%f,%f)\n", iteration, zx, zy);
 				// Z_(n+1) = Z_n ^ 2 + C    (Zは複素数の式)
 				// (a + bj)^2 = a^2 + 2abj - b^2
 				double xtemp = zx * zx - zy * zy + cx;
@@ -54,7 +53,6 @@ int	draw_julia(t_canvas *canvas)
 				color = rgb2hex(0, 0, 0);
 			else
 				color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
-			printf("color: %x\n", color);
 			my_mlx_pixel_put(&canvas->img, x, y, color);
 			x++;
 		}
