@@ -23,7 +23,7 @@ int	draw_julia(t_canvas *canvas)
 	double	cy;
 	int	iteration;
 
-	R = 4;
+	R = 2;
 	y = 0;
 	while (y < canvas->screen_height)
 	{
@@ -52,7 +52,8 @@ int	draw_julia(t_canvas *canvas)
 			if (iteration == MAX_ITERATION)
 				color = rgb2hex(0, 0, 0);
 			else
-				color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
+				// color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
+				color = get_hsv_hex(180, ((double)iteration / (double)MAX_ITERATION), ((double)iteration / (double)MAX_ITERATION));
 			my_mlx_pixel_put(&canvas->img, x, y, color);
 			x++;
 		}
