@@ -35,11 +35,16 @@ int	main(int argc, char **argv)
 {
 	t_canvas	canvas;
 
-	(void)argc;
-	(void)argv;
-	printf("HELLO fractol\n");
+	if (argc != 2)
+	{
+		printf("argc is invalid\n");
+		return (1);
+	}
 	initialize_canvas(&canvas);
-	draw_mandelbrot(&canvas);
+	if (!ft_strncmp(argv[1], "mandelbrot", 10))
+		draw_mandelbrot(&canvas);
+	else if (!ft_strncmp(argv[1], "julia", 5))
+		return (1);  // TODO: julia set
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);

@@ -1,11 +1,38 @@
 #include "fractol.h"
 
+static uint32_t	get_pixel_color(double threshold, double zx, double zy, double cx, double cy)
+{
+	double	iteration;
+	int		color;
+	double	tmp_x;
+
+	iteration = 0;
+	while (zx * zx + zy * zy < (threshold * threshold) && iteration < MAX_ITERATION)
+	{
+		tmp_x = zx * zx - zy * zy + cx;
+		zy = 2 * zx * zy + cy;
+		zx = tmp_x;
+		iteration++;
+	}
+
+	if (iteration == MAX_ITERATION)
+		color = rgb2hex(0, 0, 0);
+	else
+		color = hsv2hex(180, (iteration / MAX_ITERATION), (iteration / MAX_ITERATION));
+	return (color);
+}
+
 /*
  * マンデルブロ集合を描画する.
  * マンデルブロ集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
  * Cは描画するピクセルの位置(縦横のピクセル数の相対)
+ * Z_0 は 0 にセットする
  *
  * 発散した時は黒色で塗りつぶす
+ *
+ * メモ
+ * Z_(n+1) = Z_n ^ 2 + C    (Zは複素数の式)
+ * (a + bj)^2 = a^2 + 2abj - b^2
  */
 int	draw_mandelbrot(t_canvas *canvas)
 {
@@ -22,7 +49,6 @@ int	draw_mandelbrot(t_canvas *canvas)
 	double	cx;
 	// xz represents the imaginary part of constant C
 	double	cy;
-	int	iteration;
 
 	R = 2;
 	y = 0;
@@ -33,29 +59,10 @@ int	draw_mandelbrot(t_canvas *canvas)
 		while (x < canvas->screen_width)
 		{
 			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
-			// printf("Z=%+f%+fi\n", cy, cx);
-
-			iteration = 0;
 			zx = 0;
 			zy = 0;
-			while (zx * zx + zy * zy < (R * R) && iteration < MAX_ITERATION)
-			{
-				// printf("%d: (%f,%f)\n", iteration, zx, zy);
-				// Z_(n+1) = Z_n ^ 2 + C    (Zは複素数の式)
-				// (a + bj)^2 = a^2 + 2abj - b^2
-				double xtemp = zx * zx - zy * zy + cx;
-				zy = 2 * zx * zy + cy;
-				zx = xtemp;
-				iteration++;
-			}
-
-			int	color;
-			if (iteration == MAX_ITERATION)
-				color = rgb2hex(0, 0, 0);
-			else
-				// color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
-				color = hsv2hex(180, ((double)iteration / (double)MAX_ITERATION), ((double)iteration / (double)MAX_ITERATION));
-			my_mlx_pixel_put(&canvas->img, x, y, color);
+			my_mlx_pixel_put(&canvas->img, x, y,
+				get_pixel_color(R, zx, zy, cx, cy));
 			x++;
 		}
 		y++;
