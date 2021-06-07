@@ -67,7 +67,6 @@ int	draw_mandelbrot(t_canvas *canvas)
 		}
 		y++;
 	}
-	printf("DONE RENDERING\n");
 	return (0);
 }
 
@@ -101,16 +100,16 @@ int	draw_julia(t_canvas *canvas)
 	cy = -0.325;
 	while (y < canvas->screen_height)
 	{
-		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		zy = (((double)y / canvas->zoom / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			zx = (((double)x / canvas->zoom / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
 			my_mlx_pixel_put(&canvas->img, x, y,
 				get_pixel_color(R, zx, zy, cx, cy));
 			x++;
 		}
-		y++; }
-	printf("DONE RENDERING\n");
+		y++;
+	}
 	return (0);
 }

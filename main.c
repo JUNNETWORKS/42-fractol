@@ -29,6 +29,7 @@ void	initialize_canvas(t_canvas *canvas)
 int	main_loop(t_canvas *canvas)
 {
 	draw_julia(canvas);
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 	return (0);
 }
 
