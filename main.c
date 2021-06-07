@@ -21,11 +21,13 @@ void	initialize_canvas(t_canvas *canvas)
 		max_width, max_height);
 	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
 		&canvas->img.bits_per_pixel, &canvas->img.line_length, &canvas->img.endian);
+	canvas->screen_height = max_height;
+	canvas->screen_width = max_width;
 }
 
 int	main_loop(t_canvas *canvas)
 {
-	draw_julia(canvas);
+	(void)canvas;
 	return (0);
 }
 
@@ -37,6 +39,8 @@ int	main(int argc, char **argv)
 	(void)argv;
 	printf("HELLO fractol\n");
 	initialize_canvas(&canvas);
+	draw_julia(&canvas);
+	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);
 	mlx_loop(canvas.mlx);

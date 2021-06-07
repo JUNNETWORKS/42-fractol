@@ -37,6 +37,14 @@ typedef struct	s_canvas {
 	int			screen_height;
 }				t_canvas;
 
+// MLX
+int			exit_canvas(t_canvas *canvas);
+void		initialize_canvas(t_canvas *canvas);
+uint32_t	get_color(t_img img, int x, int y);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+uint32_t	rgb2hex(int r, int g, int b);
+
+// fracal
 int	draw_julia(t_canvas *canvas);
 
 #endif

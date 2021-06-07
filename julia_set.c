@@ -10,6 +10,7 @@ int	draw_julia(t_canvas *canvas)
 {
 	int	x;
 	int	y;
+	// choose R > 0 such that R**2 - R >= sqrt(cx**2 + cy**2)
 	double	R;
 	// zx represents the real part of z.  (scale to be between -R and R)
 	double	zx;
@@ -22,33 +23,43 @@ int	draw_julia(t_canvas *canvas)
 	double	cy;
 	int	iteration;
 
-	R = M_PI;
+	R = 2;
+	cx = -0.3;
+	cy = -0.63;
+
 	y = 0;
-	// TODO: 適当
-	cx = 0;
-	cy = 0;
 	while (y < canvas->screen_height)
 	{
-		zy = (((double)y / (double)(canvas->screen_height - 1)) - 1) * R;
+		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = (((double)x / (double)(canvas->screen_width - 1)) - 1) * R;
+			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			printf("Z=%+f%+fi\n", zx, zy);
 
 			iteration = 0;
-
 			while (zx * zx + zy * zy < (R * R) && iteration < MAX_ITERATION)
 			{
-				double xtemp = zx * zx - zy * zy;
+				printf("%d: (%f,%f)\n", iteration, zx, zy);
+				// Z_(n+1) = Z_n ^ 2 + C    (Zは複素数の式)
+				// (a + bj)^2 = a^2 + 2abj - b^2
+				double xtemp = zx * zx - zy * zy + cx;
 				zy = 2 * zx * zy + cy;
-				zx = xtemp + cx;
+				zx = xtemp;
 				iteration++;
 			}
 
+			int	color;
 			if (iteration == MAX_ITERATION)
-				// TODO: draw black...
-			else:
-				// TODO: draw white or beautiful color...
+				color = rgb2hex(0, 0, 0);
+			else
+				color = (int)(0xffffff * ((double)iteration / (double)MAX_ITERATION));
+			printf("color: %x\n", color);
+			my_mlx_pixel_put(&canvas->img, x, y, color);
+			x++;
 		}
+		y++;
 	}
+	printf("DONE RENDERING\n");
+	return (0);
 }
