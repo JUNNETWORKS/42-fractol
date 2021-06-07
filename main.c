@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	else if (!ft_strncmp(argv[1], "julia", 5))
 		draw_julia(&canvas);
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
+	mlx_hook(canvas.win, KeyPress, KeyPressMask, key_press_hook, &canvas);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);
 	mlx_loop(canvas.mlx);

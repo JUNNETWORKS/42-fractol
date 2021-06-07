@@ -14,7 +14,8 @@ HEADER_FILES := fractol.h
 SRCS := main.c \
   mlx_utils.c \
   color_utils.c \
-  draw_fractal.c
+  draw_fractal.c \
+  key_hooks.c
 OBJS := ${SRCS:.c=.o}
 DEPS := ${SRCS:.c=.d}
 
