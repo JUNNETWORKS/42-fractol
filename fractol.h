@@ -17,7 +17,7 @@
 
 # define KEY_Q 113
 # define KEY_ESC 65307
-# define MAX_ITERATION 1000
+# define MAX_ITERATION 10
 
 # define ABS(x) ((x) < 0 ? -1 * (x) : (x))
 
