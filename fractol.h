@@ -46,7 +46,8 @@ typedef struct	s_canvas {
 	// mouse position
 	int			mouse_x;
 	int			mouse_y;
-	// zoom ratio
+	// zoom ratio  default: 1
+	double		zoom;
 }				t_canvas;
 
 // MLX
@@ -55,7 +56,7 @@ void		initialize_canvas(t_canvas *canvas);
 uint32_t	get_color(t_img img, int x, int y);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int			key_press_hook(int keycode, t_canvas *canvas);
-int			mouse_hook(int button, int x, int y, void *canvas);
+int			mouse_hook(int button, int x, int y, t_canvas *canvas);
 
 // fracal
 int	draw_julia(t_canvas *canvas);

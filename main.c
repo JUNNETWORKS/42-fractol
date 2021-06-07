@@ -23,22 +23,12 @@ void	initialize_canvas(t_canvas *canvas)
 		&canvas->img.bits_per_pixel, &canvas->img.line_length, &canvas->img.endian);
 	canvas->screen_height = max_height;
 	canvas->screen_width = max_width;
-}
-
-void update_mouse_position(t_canvas *canvas)
-{
-	int	x;
-	int	y;
-
-	mlx_mouse_get_pos(canvas->mlx, canvas->win, &x, &y);
-	canvas->mouse_x = x;
-	canvas->mouse_y = y;
+	canvas->zoom = 1;
 }
 
 int	main_loop(t_canvas *canvas)
 {
-	update_mouse_position(canvas);
-	printf("mouse: (%d, %d)\n", canvas->mouse_x, canvas->mouse_y);
+	draw_julia(canvas);
 	return (0);
 }
 
