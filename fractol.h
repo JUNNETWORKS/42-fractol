@@ -49,5 +49,6 @@ uint32_t	get_hsv_hex(double h, double s, double v);
 
 // fracal
 int	draw_julia(t_canvas *canvas);
+int	draw_mandelbrot(t_canvas *canvas);
 
 #endif

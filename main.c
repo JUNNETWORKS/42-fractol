@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	printf("HELLO fractol\n");
 	initialize_canvas(&canvas);
-	draw_julia(&canvas);
+	draw_mandelbrot(&canvas);
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);
