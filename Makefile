@@ -3,14 +3,18 @@ CC := gcc
 CFLAGS := -Werror -Wall -Wextra -g
 INC=/usr/include
 INCLIB=$(INC)/../lib
-MLX_PATH = minilibx-linux
+MLX_PATH := ./minilibx-linux
+MLX_LIB := -L$(MLX_PATH) -lmlx
 
 LIBFT_PATH := libft
 LIBFT_MAKE := $(MAKE) -C $(LIBFT_PATH)
 LIBFT_LIB := -L./libft -lft
 
 HEADER_FILES := fractol.h
-SRCS := main.c
+SRCS := main.c \
+  mlx_utils.c \
+  color_utils.c \
+  julia_set.c
 OBJS := ${SRCS:.c=.o}
 DEPS := ${SRCS:.c=.d}
 
@@ -27,7 +31,7 @@ $(MLX_PATH):
 -include $(DEPS)
 $(NAME): $(MLX_PATH) $(OBJS)
 	$(LIBFT_MAKE)
-	$(CC) -o $(NAME) $(OBJS) $(LIBFT_LIB) -L$(MLX_PATH) -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd
+	$(CC) -o $(NAME) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
 clean:
 	$(LIBFT_MAKE) clean
