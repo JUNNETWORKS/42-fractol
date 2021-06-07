@@ -70,3 +70,47 @@ int	draw_mandelbrot(t_canvas *canvas)
 	printf("DONE RENDERING\n");
 	return (0);
 }
+
+/*
+ * ジュリア集合を描画する.
+ * ジュリア集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
+ * Cは複素数の定数(全てのピクセルにおいて同じ数字を使う)
+ * Z_0 は描画するピクセルの位置(縦横のピクセル数の相対)
+ *
+ * 発散した時は黒色で塗りつぶす
+ */
+int	draw_julia(t_canvas *canvas)
+{
+	int	x;
+	int	y;
+	// choose R > 0 such that R**2 - R >= sqrt(cx**2 + cy**2)
+	double	R;
+	// zx represents the real part of z.  (scale to be between -R and R)
+	double	zx;
+	// zy represents the imaginary part of z.  (scale to be between -R and R)
+	double	zy;
+	// C is complex parameter
+	// xz represents the real part of constant C
+	double	cx;
+	// xz represents the imaginary part of constant C
+	double	cy;
+
+	R = 2;
+	y = 0;
+	cx = 0.4;
+	cy = -0.325;
+	while (y < canvas->screen_height)
+	{
+		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		x = 0;
+		while (x < canvas->screen_width)
+		{
+			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			my_mlx_pixel_put(&canvas->img, x, y,
+				get_pixel_color(R, zx, zy, cx, cy));
+			x++;
+		}
+		y++; }
+	printf("DONE RENDERING\n");
+	return (0);
+}

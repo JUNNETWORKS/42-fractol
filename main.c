@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	if (!ft_strncmp(argv[1], "mandelbrot", 10))
 		draw_mandelbrot(&canvas);
 	else if (!ft_strncmp(argv[1], "julia", 5))
-		return (1);  // TODO: julia set
+		draw_julia(&canvas);
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);
