@@ -19,6 +19,8 @@
 # define KEY_ESC 65307
 # define MAX_ITERATION 1000
 
+# define ABS(x) ((x) < 0 ? -1 * (x) : (x))
+
 typedef struct	s_img {
 	void		*img;
 	char		*addr;
@@ -43,6 +45,7 @@ void		initialize_canvas(t_canvas *canvas);
 uint32_t	get_color(t_img img, int x, int y);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 uint32_t	rgb2hex(int r, int g, int b);
+uint32_t	get_hsv_hex(double h, double s, double v);
 
 // fracal
 int	draw_julia(t_canvas *canvas);
