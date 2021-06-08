@@ -1,13 +1,13 @@
 #include "fractol.h"
 
-static uint32_t	get_pixel_color(double threshold, double zx, double zy, double cx, double cy)
+static uint32_t	get_pixel_color(double zx, double zy, double cx, double cy)
 {
 	double	iteration;
 	int		color;
 	double	tmp_x;
 
 	iteration = 0;
-	while (zx * zx + zy * zy < (threshold * threshold) && iteration < MAX_ITERATION)
+	while (zx * zx + zy * zy < 4 && iteration < MAX_ITERATION)
 	{
 		tmp_x = zx * zx - zy * zy + cx;
 		zy = 2 * zx * zy + cy;
@@ -54,15 +54,15 @@ int	draw_mandelbrot(t_canvas *canvas)
 	y = 0;
 	while (y < canvas->screen_height)
 	{
-		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R / canvas->zoom;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R / canvas->zoom;
 			zx = 0;
 			zy = 0;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(R, zx, zy, cx, cy));
+				get_pixel_color(zx, zy, cx, cy));
 			x++;
 		}
 		y++;
@@ -95,15 +95,20 @@ int	draw_julia(t_canvas *canvas)
 	y = 0;
 	cx = 0.4;
 	cy = -0.325;
+	// 1ピクセルで複素数平面上でどれだけ進むか
+	double delta_re = (canvas->max_r - canvas->min_r) / (WIDTH - 1);
+	double delta_im = (canvas->max_i - canvas->min_i) / (HEIGHT - 1);
 	while (y < canvas->screen_height)
 	{
-		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * THRESHOLD / canvas->zoom + canvas->top;
+		zy = y * delta_im;
+		// zy = (((double)y / (double)(canvas->screen_height - 1)) * 2) * THRESHOLD / canvas->zoom + canvas->top;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * THRESHOLD / canvas->zoom + canvas->left;
+			zx = x * delta_re;
+			// zx = (((double)x / (double)(canvas->screen_width - 1)) * 2) * THRESHOLD / canvas->zoom + canvas->left;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(THRESHOLD, zx, zy, cx, cy));
+				get_pixel_color(zx, zy, cx, cy));
 			x++;
 		}
 		y++;

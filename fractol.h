@@ -25,6 +25,8 @@
 # define ZOOM_STEP 0.5
 # define THRESHOLD 2
 
+# define WIDTH 800
+# define HEIGHT 800
 # define MAX_ITERATION 100
 
 # define ABS(x) ((x) < 0 ? -1 * (x) : (x))
@@ -57,8 +59,10 @@ typedef struct	s_canvas {
 	double				zoom;
 	// 左上の座標
 	// マウスの座標に向かってズームする時に必要
-	double				top;
-	double				left;
+	double				min_r;
+	double				min_i;
+	double				max_r;
+	double				max_i;
 	enum e_fractal_type	fractal_type;
 }				t_canvas;
 

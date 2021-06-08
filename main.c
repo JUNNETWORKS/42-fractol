@@ -8,24 +8,19 @@ int	exit_canvas(t_canvas *canvas)
 
 void	initialize_canvas(t_canvas *canvas)
 {
-	int max_width;
-	int max_height;
-
 	canvas->mlx = mlx_init();
-	// mlx_get_screen_size(canvas->mlx, &max_width, &max_height);
-	// TODO: とりあえずは800*800固定でやる
-	max_width = 800;
-	max_height = 800;
-	canvas->win = mlx_new_window(canvas->mlx, max_width, max_height, "fractol");
+	canvas->win = mlx_new_window(canvas->mlx, WIDTH, HEIGHT, "fractol");
 	canvas->img.img = mlx_new_image(canvas->mlx,
-		max_width, max_height);
+		WIDTH, HEIGHT);
 	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
 		&canvas->img.bits_per_pixel, &canvas->img.line_length, &canvas->img.endian);
-	canvas->screen_height = max_height;
-	canvas->screen_width = max_width;
+	canvas->screen_height = HEIGHT;
+	canvas->screen_width = WIDTH;
+	canvas->max_r = 2;
+	canvas->max_i = 2;
+	canvas->min_r = -2;
+	canvas->min_i = -2;
 	canvas->zoom = 1;
-	canvas->top = THRESHOLD;
-	canvas->left = -THRESHOLD;
 }
 
 int	main_loop(t_canvas *canvas)
