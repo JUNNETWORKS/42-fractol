@@ -39,21 +39,27 @@ typedef struct	s_img {
 	int			height;
 }				t_img;
 
+enum e_fractal_type {
+	FRACTAL_JULIA,
+	FRACTAL_MANDELBROT,
+};
+
 typedef struct	s_canvas {
-	void		*mlx;
-	void		*win;
-	t_img		img;
-	int			screen_width;
-	int			screen_height;
+	void				*mlx;
+	void				*win;
+	t_img				img;
+	int					screen_width;
+	int					screen_height;
 	// mouse position
-	int			mouse_x;
-	int			mouse_y;
+	int					mouse_x;
+	int					mouse_y;
 	// zoom ratio  default: 1
-	double		zoom;
+	double				zoom;
 	// 左上の座標
 	// マウスの座標に向かってズームする時に必要
-	double		top;
-	double		left;
+	double				top;
+	double				left;
+	enum e_fractal_type	fractal_type;
 }				t_canvas;
 
 // MLX
