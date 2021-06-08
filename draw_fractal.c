@@ -1,17 +1,17 @@
 #include "fractol.h"
 
-static uint32_t	get_pixel_color(double zx, double zy, double cx, double cy)
+static uint32_t	get_pixel_color(double z_re, double z_im, double c_re, double c_im)
 {
 	double	iteration;
 	int		color;
 	double	tmp_x;
 
 	iteration = 0;
-	while (zx * zx + zy * zy < 4 && iteration < MAX_ITERATION)
+	while (z_re * z_re + z_im * z_im < 4 && iteration < MAX_ITERATION)
 	{
-		tmp_x = zx * zx - zy * zy + cx;
-		zy = 2 * zx * zy + cy;
-		zx = tmp_x;
+		tmp_x = z_re * z_re - z_im * z_im + c_re;
+		z_im = 2 * z_re * z_im + c_im;
+		z_re = tmp_x;
 		iteration++;
 	}
 
@@ -54,11 +54,11 @@ int	draw_mandelbrot(t_canvas *canvas)
 	y = 0;
 	while (y < canvas->screen_height)
 	{
-		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R / canvas->zoom;
+		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R / canvas->zoom;
+			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
 			zx = 0;
 			zy = 0;
 			my_mlx_pixel_put(&canvas->img, x, y,
@@ -83,34 +83,34 @@ int	draw_julia(t_canvas *canvas)
 	int	x;
 	int	y;
 	// zx represents the real part of z.  (scale to be between -R and R)
-	double	zx;
+	double	z_re;
 	// zy represents the imaginary part of z.  (scale to be between -R and R)
-	double	zy;
+	double	z_im;
 	// C is complex parameter
 	// xz represents the real part of constant C
-	double	cx;
+	double	c_re;
 	// xz represents the imaginary part of constant C
-	double	cy;
+	double	c_im;
 
 	y = 0;
-	cx = 0.4;
-	cy = -0.325;
+	c_re = 0.4;
+	c_im = -0.325;
 	// 1ピクセルで複素数平面上でどれだけ進むか
 	double delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
 	double delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	while (y < canvas->screen_height)
 	{
-		zy = canvas->max_im - y * delta_im;
+		z_im = canvas->max_im - y * delta_im;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = canvas->min_re + x * delta_re;
+			z_re = canvas->min_re + x * delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(zx, zy, cx, cy));
+				get_pixel_color(z_re, z_im, c_re, c_im));
 			x++;
 		}
 		y++;
 	}
-	printf("zx: %f, zy: %f\n", zx, zy);
+	// printf("zx: %f, zy: %f\n", zx, zy);
 	return (0);
 }

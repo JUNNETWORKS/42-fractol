@@ -19,7 +19,7 @@ int	mouse_hook(int button, int x, int y, t_canvas *canvas)
 	double interpolation;
 
 	mouse_re = (double)x / (WIDTH / (canvas->max_re - canvas->min_re)) + canvas->min_re;
-	mouse_im = (double)y / (HEIGHT / (canvas->max_im - canvas->min_im)) * -1 + canvas->min_im;
+	mouse_im = (double)y / (HEIGHT / (canvas->max_im - canvas->min_im)) * -1 + canvas->max_im;
 	printf("button: %x, x: %d, y: %d\n", button, x, y);
 	if (button == SCROLL_UP)
 		interpolation = 1.0 / 0.8;
@@ -31,6 +31,7 @@ int	mouse_hook(int button, int x, int y, t_canvas *canvas)
 	canvas->min_im = interpolate(mouse_im, canvas->min_im, interpolation);
 	canvas->max_re = interpolate(mouse_re, canvas->max_re, interpolation);
 	canvas->max_im = interpolate(mouse_im, canvas->max_im, interpolation);
-	printf("canvas->zoom: %f\n", canvas->zoom);
+	printf("max_re: %f, min_re: %f\n", canvas->max_re, canvas->min_re);
+	printf("max_im: %f, min_im: %f\n", canvas->max_im, canvas->min_im);
 	return (0);
 }
