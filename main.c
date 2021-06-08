@@ -48,9 +48,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	initialize_canvas(&canvas);
-	if (!ft_strncmp(argv[1], "mandelbrot", 10))
+	if (!ft_strncmp(argv[1], "mandelbrot", 11))
 		canvas.fractal_type = FRACTAL_MANDELBROT;
-	else if (!ft_strncmp(argv[1], "julia", 5))
+	else if (!ft_strncmp(argv[1], "julia", 6))
 		canvas.fractal_type = FRACTAL_JULIA;
 	else
 	{
