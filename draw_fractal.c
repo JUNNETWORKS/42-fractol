@@ -100,13 +100,11 @@ int	draw_julia(t_canvas *canvas)
 	double delta_im = (canvas->max_i - canvas->min_i) / (HEIGHT - 1);
 	while (y < canvas->screen_height)
 	{
-		zy = y * delta_im;
-		// zy = (((double)y / (double)(canvas->screen_height - 1)) * 2) * THRESHOLD / canvas->zoom + canvas->top;
+		zy = canvas->max_i - y * delta_im;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = x * delta_re;
-			// zx = (((double)x / (double)(canvas->screen_width - 1)) * 2) * THRESHOLD / canvas->zoom + canvas->left;
+			zx = canvas->min_r + x * delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
 				get_pixel_color(zx, zy, cx, cy));
 			x++;
