@@ -82,8 +82,6 @@ int	draw_julia(t_canvas *canvas)
 {
 	int	x;
 	int	y;
-	// choose R > 0 such that R**2 - R >= sqrt(cx**2 + cy**2)
-	double	R;
 	// zx represents the real part of z.  (scale to be between -R and R)
 	double	zx;
 	// zy represents the imaginary part of z.  (scale to be between -R and R)
@@ -94,22 +92,22 @@ int	draw_julia(t_canvas *canvas)
 	// xz represents the imaginary part of constant C
 	double	cy;
 
-	R = 2;
 	y = 0;
 	cx = 0.4;
 	cy = -0.325;
 	while (y < canvas->screen_height)
 	{
-		zy = (((double)y / canvas->zoom / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		zy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * THRESHOLD / canvas->zoom + canvas->top;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = (((double)x / canvas->zoom / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
+			zx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * THRESHOLD / canvas->zoom + canvas->left;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(R, zx, zy, cx, cy));
+				get_pixel_color(THRESHOLD, zx, zy, cx, cy));
 			x++;
 		}
 		y++;
 	}
+	printf("zx: %f, zy: %f\n", zx, zy);
 	return (0);
 }

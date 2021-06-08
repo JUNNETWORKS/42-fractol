@@ -24,6 +24,8 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->screen_height = max_height;
 	canvas->screen_width = max_width;
 	canvas->zoom = 1;
+	canvas->top = THRESHOLD;
+	canvas->left = -THRESHOLD;
 }
 
 int	main_loop(t_canvas *canvas)

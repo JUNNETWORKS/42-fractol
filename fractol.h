@@ -22,8 +22,10 @@
 # define MOUSE_RIGHT 1
 # define MOUSE_CENTER 2
 # define MOUSE_LEFT 3
+# define ZOOM_STEP 0.5
+# define THRESHOLD 2
 
-# define MAX_ITERATION 10
+# define MAX_ITERATION 100
 
 # define ABS(x) ((x) < 0 ? -1 * (x) : (x))
 
@@ -48,6 +50,10 @@ typedef struct	s_canvas {
 	int			mouse_y;
 	// zoom ratio  default: 1
 	double		zoom;
+	// 左上の座標
+	// マウスの座標に向かってズームする時に必要
+	double		top;
+	double		left;
 }				t_canvas;
 
 // MLX
