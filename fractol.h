@@ -59,10 +59,10 @@ typedef struct	s_canvas {
 	double				zoom;
 	// 左上の座標
 	// マウスの座標に向かってズームする時に必要
-	double				min_r;
-	double				min_i;
-	double				max_r;
-	double				max_i;
+	double				min_re;
+	double				min_im;
+	double				max_re;
+	double				max_im;
 	enum e_fractal_type	fractal_type;
 }				t_canvas;
 

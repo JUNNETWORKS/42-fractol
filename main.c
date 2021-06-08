@@ -16,10 +16,10 @@ void	initialize_canvas(t_canvas *canvas)
 		&canvas->img.bits_per_pixel, &canvas->img.line_length, &canvas->img.endian);
 	canvas->screen_height = HEIGHT;
 	canvas->screen_width = WIDTH;
-	canvas->max_r = 2;
-	canvas->max_i = 2;
-	canvas->min_r = -2;
-	canvas->min_i = -2;
+	canvas->max_re = 2;
+	canvas->max_im = 2;
+	canvas->min_re = -2;
+	canvas->min_im = -2;
 	canvas->zoom = 1;
 }
 

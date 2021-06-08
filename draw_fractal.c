@@ -96,15 +96,15 @@ int	draw_julia(t_canvas *canvas)
 	cx = 0.4;
 	cy = -0.325;
 	// 1ピクセルで複素数平面上でどれだけ進むか
-	double delta_re = (canvas->max_r - canvas->min_r) / (WIDTH - 1);
-	double delta_im = (canvas->max_i - canvas->min_i) / (HEIGHT - 1);
+	double delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	double delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	while (y < canvas->screen_height)
 	{
-		zy = canvas->max_i - y * delta_im;
+		zy = canvas->max_im - y * delta_im;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			zx = canvas->min_r + x * delta_re;
+			zx = canvas->min_re + x * delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
 				get_pixel_color(zx, zy, cx, cy));
 			x++;
