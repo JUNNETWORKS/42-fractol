@@ -20,6 +20,7 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->max_im = 2;
 	canvas->min_re = -2;
 	canvas->min_im = -2;
+	canvas->max_iter = 100;
 }
 
 int	main_loop(t_canvas *canvas)

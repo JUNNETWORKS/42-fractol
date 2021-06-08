@@ -1,13 +1,13 @@
 #include "fractol.h"
 
-static uint32_t	get_pixel_color(double z_re, double z_im, double c_re, double c_im)
+static uint32_t	get_pixel_color(t_canvas *canvas, double z_re, double z_im, double c_re, double c_im)
 {
 	double	iteration;
 	int		color;
 	double	tmp_x;
 
 	iteration = 0;
-	while (z_re * z_re + z_im * z_im < 4 && iteration < MAX_ITERATION)
+	while (z_re * z_re + z_im * z_im < 4 && iteration < canvas->max_iter)
 	{
 		tmp_x = z_re * z_re - z_im * z_im + c_re;
 		z_im = 2 * z_re * z_im + c_im;
@@ -15,10 +15,10 @@ static uint32_t	get_pixel_color(double z_re, double z_im, double c_re, double c_
 		iteration++;
 	}
 
-	if (iteration == MAX_ITERATION)
+	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(180, (iteration / MAX_ITERATION), (iteration / MAX_ITERATION));
+		color = hsv2hex(180, (iteration / canvas->max_iter), (iteration / canvas->max_iter));
 	return (color);
 }
 
@@ -62,7 +62,7 @@ int	draw_mandelbrot(t_canvas *canvas)
 			zx = 0;
 			zy = 0;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(zx, zy, cx, cy));
+				get_pixel_color(canvas, zx, zy, cx, cy));
 			x++;
 		}
 		y++;
@@ -106,7 +106,7 @@ int	draw_julia(t_canvas *canvas)
 		{
 			z_re = canvas->min_re + x * delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(z_re, z_im, c_re, c_im));
+				get_pixel_color(canvas, z_re, z_im, c_re, c_im));
 			x++;
 		}
 		y++;
