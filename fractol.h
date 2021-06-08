@@ -51,6 +51,8 @@ typedef struct	s_canvas {
 	t_img				img;
 	int					screen_width;
 	int					screen_height;
+	// フラクタルの種類
+	enum e_fractal_type	fractal_type;
 	// mouse position
 	int					mouse_x;
 	int					mouse_y;
@@ -59,7 +61,14 @@ typedef struct	s_canvas {
 	double				max_re;
 	double				max_im;
 	int					max_iter;
-	enum e_fractal_type	fractal_type;
+	// ジュリア集合, マンデルブロ集合での複素数平面におけるパラメータ
+	double				z_re;
+	double				z_im;
+	double				c_re;
+	double				c_im;
+	// 1ピクセルで複素数平面上でどれだけ進むか
+	double				delta_re;
+	double				delta_im;
 }				t_canvas;
 
 // MLX

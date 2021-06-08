@@ -1,20 +1,21 @@
 #include "fractol.h"
 
-static uint32_t	get_pixel_color(t_canvas *canvas, double z_re, double z_im, double c_re, double c_im)
+static uint32_t	get_color_in_fractal(t_canvas *canvas)
 {
 	double	iteration;
 	int		color;
 	double	tmp_x;
 
 	iteration = 0;
-	while (z_re * z_re + z_im * z_im < 4 && iteration < canvas->max_iter)
+	while (canvas->z_re * canvas->z_re + canvas->z_im * canvas->z_im < 4
+		&& iteration < canvas->max_iter)
 	{
-		tmp_x = z_re * z_re - z_im * z_im + c_re;
-		z_im = 2 * z_re * z_im + c_im;
-		z_re = tmp_x;
+		tmp_x = canvas->z_re * canvas->z_re
+			- canvas->z_im * canvas->z_im + canvas->c_re;
+		canvas->z_im = 2 * canvas->z_re * canvas->z_im + canvas->c_im;
+		canvas->z_re = tmp_x;
 		iteration++;
 	}
-
 	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
@@ -38,31 +39,21 @@ int	draw_mandelbrot(t_canvas *canvas)
 {
 	int	x;
 	int	y;
-	// choose R > 0 such that R**2 - R >= sqrt(cx**2 + cy**2)
-	double	R;
-	// zx represents the real part of z.  (scale to be between -R and R)
-	double	zx;
-	// zy represents the imaginary part of z.  (scale to be between -R and R)
-	double	zy;
-	// C is complex parameter
-	// xz represents the real part of constant C
-	double	cx;
-	// xz represents the imaginary part of constant C
-	double	cy;
 
-	R = 2;
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
 	while (y < canvas->screen_height)
 	{
-		cy = (((double)y / (double)(canvas->screen_height - 1)) * 2 - 1) * R;
+		canvas->c_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			cx = (((double)x / (double)(canvas->screen_width - 1)) * 2 - 1) * R;
-			zx = 0;
-			zy = 0;
+			canvas->c_re = canvas->min_re + x * canvas->delta_re;
+			canvas->z_re = 0;
+			canvas->z_im = 0;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(canvas, zx, zy, cx, cy));
+				get_color_in_fractal(canvas));
 			x++;
 		}
 		y++;
@@ -82,35 +73,25 @@ int	draw_julia(t_canvas *canvas)
 {
 	int	x;
 	int	y;
-	// zx represents the real part of z.  (scale to be between -R and R)
-	double	z_re;
-	// zy represents the imaginary part of z.  (scale to be between -R and R)
-	double	z_im;
-	// C is complex parameter
-	// xz represents the real part of constant C
-	double	c_re;
-	// xz represents the imaginary part of constant C
-	double	c_im;
 
+	// TODO: C は自由に変えれるようにする
+	canvas->c_re = 0.4;
+	canvas->c_im = -0.325;
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
-	c_re = 0.4;
-	c_im = -0.325;
-	// 1ピクセルで複素数平面上でどれだけ進むか
-	double delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
-	double delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	while (y < canvas->screen_height)
 	{
-		z_im = canvas->max_im - y * delta_im;
+		canvas->z_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
 		while (x < canvas->screen_width)
 		{
-			z_re = canvas->min_re + x * delta_re;
+			canvas->z_re = canvas->min_re + x * canvas->delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
-				get_pixel_color(canvas, z_re, z_im, c_re, c_im));
+				get_color_in_fractal(canvas));
 			x++;
 		}
 		y++;
 	}
-	// printf("zx: %f, zy: %f\n", zx, zy);
 	return (0);
 }
