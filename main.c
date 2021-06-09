@@ -11,9 +11,10 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->mlx = mlx_init();
 	canvas->win = mlx_new_window(canvas->mlx, WIDTH, HEIGHT, "fractol");
 	canvas->img.img = mlx_new_image(canvas->mlx,
-		WIDTH, HEIGHT);
+			WIDTH, HEIGHT);
 	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
-		&canvas->img.bits_per_pixel, &canvas->img.line_length, &canvas->img.endian);
+			&canvas->img.bits_per_pixel,
+			&canvas->img.line_length, &canvas->img.endian);
 	canvas->screen_height = HEIGHT;
 	canvas->screen_width = WIDTH;
 	canvas->max_re = 2;

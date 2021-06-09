@@ -22,8 +22,7 @@ uint32_t	hsv2hex(double h, double s, double v)
 	double	x;
 	double	m;
 
-	// c = s;      // 円錐モデル
-	c = v * s;  // 円柱モデル
+	c = v * s;
 	x = c * (1 - ABS(((int)h / 60 % 2) - 1));
 	m = v - c;
 	if (s == 0)

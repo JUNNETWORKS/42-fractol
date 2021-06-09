@@ -19,7 +19,8 @@ static uint32_t	get_color_in_fractal(t_canvas *canvas)
 	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(180, (iteration / canvas->max_iter), (iteration / canvas->max_iter));
+		color = hsv2hex(180, (iteration / canvas->max_iter),
+				(iteration / canvas->max_iter));
 	return (color);
 }
 
@@ -67,14 +68,15 @@ int	draw_mandelbrot(t_canvas *canvas)
  * Cは複素数の定数(全てのピクセルにおいて同じ数字を使う)
  * Z_0 は描画するピクセルの位置(縦横のピクセル数の相対)
  *
- * 発散した時は黒色で塗りつぶす
+ * 発散した時は黒色で塗りつぶす.
+ *
+ * C を自由に変えれるようにできれば面白そう
  */
 int	draw_julia(t_canvas *canvas)
 {
 	int	x;
 	int	y;
 
-	// TODO: C は自由に変えれるようにする
 	canvas->c_re = 0.4;
 	canvas->c_im = -0.325;
 	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
