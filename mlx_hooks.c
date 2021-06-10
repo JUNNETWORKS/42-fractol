@@ -32,5 +32,7 @@ int	mouse_hook(int button, int x, int y, t_canvas *canvas)
 	canvas->min_im = interpolate(mouse_im, canvas->min_im, interpolation);
 	canvas->max_re = interpolate(mouse_re, canvas->max_re, interpolation);
 	canvas->max_im = interpolate(mouse_im, canvas->max_im, interpolation);
+	canvas->fractal_drawer(canvas);
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 	return (0);
 }

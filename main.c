@@ -26,35 +26,35 @@ void	initialize_canvas(t_canvas *canvas)
 
 int	main_loop(t_canvas *canvas)
 {
-	if (canvas->fractal_type == FRACTAL_JULIA)
-		draw_julia(canvas);
-	else if (canvas->fractal_type == FRACTAL_MANDELBROT)
-		draw_mandelbrot(canvas);
-	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
+	(void)canvas;
 	return (0);
+}
+
+bool	set_fractal_type(t_canvas *canvas, char *str)
+{
+	if (!ft_strncmp(str, "mandelbrot", 11))
+		canvas->fractal_drawer = draw_mandelbrot;
+	else if (!ft_strncmp(str, "julia", 6))
+		canvas->fractal_drawer = draw_julia;
+	else
+		return (false);
+	return (true);
 }
 
 int	main(int argc, char **argv)
 {
 	t_canvas	canvas;
 
-	if (argc != 2)
-	{
-		printf("argc is invalid\n");
-		return (1);
-	}
-	initialize_canvas(&canvas);
-	if (!ft_strncmp(argv[1], "mandelbrot", 11))
-		canvas.fractal_type = FRACTAL_MANDELBROT;
-	else if (!ft_strncmp(argv[1], "julia", 6))
-		canvas.fractal_type = FRACTAL_JULIA;
-	else
+	if (argc != 2 || !set_fractal_type(&canvas, argv[1]))
 	{
 		printf("You have to select fractal type\n"
 			"- mandelbrot\n"
 			"- julia\n");
 		return (1);
 	}
+	initialize_canvas(&canvas);
+	canvas.fractal_drawer(&canvas);
+	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, KeyPress, KeyPressMask, key_press_hook, &canvas);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_mouse_hook(canvas.win, mouse_hook, &canvas);

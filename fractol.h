@@ -45,14 +45,17 @@ enum e_fractal_type {
 	FRACTAL_MANDELBROT,
 };
 
-typedef struct	s_canvas {
+typedef struct s_canvas t_canvas;
+typedef int (*t_fractal_drawer)(t_canvas*);
+
+struct	s_canvas {
 	void				*mlx;
 	void				*win;
 	t_img				img;
 	int					screen_width;
 	int					screen_height;
 	// フラクタルの種類
-	enum e_fractal_type	fractal_type;
+	t_fractal_drawer	fractal_drawer;
 	// mouse position
 	int					mouse_x;
 	int					mouse_y;
@@ -69,7 +72,7 @@ typedef struct	s_canvas {
 	// 1ピクセルで複素数平面上でどれだけ進むか
 	double				delta_re;
 	double				delta_im;
-}				t_canvas;
+};
 
 // MLX
 int			exit_canvas(t_canvas *canvas);
