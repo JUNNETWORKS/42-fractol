@@ -18,6 +18,8 @@ int	mouse_hook(int button, int x, int y, t_canvas *canvas)
 	double	mouse_im;
 	double	interpolation;
 
+	if (button != SCROLL_UP && button != SCROLL_DOWN)
+		return (0);
 	mouse_re = (double)x
 		/ (WIDTH / (canvas->max_re - canvas->min_re)) + canvas->min_re;
 	mouse_im = (double)y
