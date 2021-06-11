@@ -23,7 +23,7 @@ uint32_t	hsv2hex(double h, double s, double v)
 	double	m;
 
 	c = v * s;
-	x = c * (1 - ABS(((int)h / 60 % 2) - 1));
+	x = c * (1 - abs_double(((int)h / 60 % 2) - 1));
 	m = v - c;
 	if (s == 0)
 		return (rgb2hex((v + m) * 255, (v + m) * 255, (v + m) * 255));

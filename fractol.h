@@ -35,8 +35,6 @@
 # define DEFAULT_JULIA_C_IM -0.325
 # define MOVE_RATIO 0.01
 
-# define ABS(x) ((x) < 0 ? -1 * (x) : (x))
-
 typedef struct	s_img {
 	void		*img;
 	char		*addr;
@@ -59,24 +57,17 @@ struct	s_canvas {
 	void				*mlx;
 	void				*win;
 	t_img				img;
-	// フラクタルの種類
 	t_fractal_drawer	fractal_drawer;
-	// mouse position
-	int					mouse_x;
-	int					mouse_y;
-	// Shiftキーが押されているか
 	bool				is_pressed_shift;
 	double				min_re;
 	double				min_im;
 	double				max_re;
 	double				max_im;
 	int					max_iter;
-	// ジュリア集合, マンデルブロ集合での複素数平面におけるパラメータ
 	double				z_re;
 	double				z_im;
 	double				c_re;
 	double				c_im;
-	// 1ピクセルで複素数平面上でどれだけ進むか
 	double				delta_re;
 	double				delta_im;
 };
@@ -95,8 +86,9 @@ int			draw_julia(t_canvas *canvas);
 int			draw_mandelbrot(t_canvas *canvas);
 int			draw_burningship(t_canvas *canvas);
 
-// color utils
+// utils
 uint32_t	rgb2hex(int r, int g, int b);
 uint32_t	hsv2hex(double h, double s, double v);
+double		abs_double(double val);
 
 #endif

@@ -17,7 +17,8 @@ SRCS := main.c \
   draw_fractal.c \
   mlx_hooks.c \
   mlx_hooks2.c \
-  canvas_utils.c
+  canvas_utils.c \
+  utils.c
 OBJS := ${SRCS:.c=.o}
 DEPS := ${SRCS:.c=.d}
 
