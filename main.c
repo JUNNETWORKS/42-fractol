@@ -53,8 +53,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	initialize_canvas(&canvas);
-	canvas.fractal_drawer(&canvas);
-	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, KeyPress, KeyPressMask, key_press_hook, &canvas);
 	mlx_hook(canvas.win, KeyRelease, KeyReleaseMask, key_release_hook, &canvas);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
