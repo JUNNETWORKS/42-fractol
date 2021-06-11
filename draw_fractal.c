@@ -108,7 +108,8 @@ static uint32_t	get_color_in_burningship(t_canvas *canvas)
 	{
 		tmp_x = canvas->z_re * canvas->z_re
 			- canvas->z_im * canvas->z_im + canvas->c_re;
-		canvas->z_im = abs_double(2 * canvas->z_re * canvas->z_im) + canvas->c_im;
+		canvas->z_im = abs_double(2 * canvas->z_re * canvas->z_im)
+			+ canvas->c_im;
 		canvas->z_re = tmp_x;
 		iteration++;
 	}
