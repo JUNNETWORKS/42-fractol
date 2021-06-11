@@ -7,7 +7,7 @@ static uint32_t	get_color_in_fractal(t_canvas *canvas)
 	double	tmp_x;
 
 	iteration = 0;
-	while (canvas->z_re * canvas->z_re + canvas->z_im * canvas->z_im < 4
+	while (canvas->z_re * canvas->z_re + canvas->z_im * canvas->z_im <= 4
 		&& iteration < canvas->max_iter)
 	{
 		tmp_x = canvas->z_re * canvas->z_re
@@ -46,10 +46,10 @@ int	draw_mandelbrot(t_canvas *canvas)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		canvas->c_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
 		while (x < WIDTH)
 		{
+			canvas->c_im = canvas->max_im - y * canvas->delta_im;
 			canvas->c_re = canvas->min_re + x * canvas->delta_re;
 			canvas->z_re = 0;
 			canvas->z_im = 0;
@@ -84,10 +84,10 @@ int	draw_julia(t_canvas *canvas)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		canvas->z_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
 		while (x < WIDTH)
 		{
+			canvas->z_im = canvas->max_im - y * canvas->delta_im;
 			canvas->z_re = canvas->min_re + x * canvas->delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
 				get_color_in_fractal(canvas));
