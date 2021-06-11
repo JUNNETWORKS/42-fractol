@@ -107,18 +107,16 @@ static uint32_t	get_color_in_burningship(t_canvas *canvas)
 	while (canvas->z_re * canvas->z_re + canvas->z_im * canvas->z_im <= 4
 		&& iteration < canvas->max_iter)
 	{
-		canvas->z_re = ABS(canvas->z_re);
-		canvas->z_im = ABS(canvas->z_im);
 		tmp_x = canvas->z_re * canvas->z_re
 			- canvas->z_im * canvas->z_im + canvas->c_re;
-		canvas->z_im = 2 * canvas->z_re * canvas->z_im + canvas->c_im;
+		canvas->z_im = ABS(2 * canvas->z_re * canvas->z_im) + canvas->c_im;
 		canvas->z_re = tmp_x;
 		iteration++;
 	}
 	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(180, ((double)iteration / canvas->max_iter),
+		color = hsv2hex(iteration % 360, (double)iteration / canvas->max_iter,
 				((double)iteration / canvas->max_iter));
 	return (color);
 }
