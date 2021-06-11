@@ -19,7 +19,7 @@ static uint32_t	get_color_in_fractal(t_canvas *canvas)
 	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(180, ((double)iteration / canvas->max_iter),
+		color = hsv2hex(iteration % 360, (double)iteration / canvas->max_iter,
 				((double)iteration / canvas->max_iter));
 	return (color);
 }
