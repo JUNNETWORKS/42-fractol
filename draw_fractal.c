@@ -2,7 +2,7 @@
 
 static uint32_t	get_color_in_fractal(t_canvas *canvas)
 {
-	double	iteration;
+	int		iteration;
 	int		color;
 	double	tmp_x;
 
@@ -19,8 +19,8 @@ static uint32_t	get_color_in_fractal(t_canvas *canvas)
 	if (iteration == canvas->max_iter)
 		color = rgb2hex(0, 0, 0);
 	else
-		color = hsv2hex(180, (iteration / canvas->max_iter),
-				(iteration / canvas->max_iter));
+		color = hsv2hex(180, ((double)iteration / canvas->max_iter),
+				((double)iteration / canvas->max_iter));
 	return (color);
 }
 
@@ -41,8 +41,8 @@ int	draw_mandelbrot(t_canvas *canvas)
 	int	x;
 	int	y;
 
-	canvas->delta_re = (canvas->max_re - canvas->min_re) / WIDTH;
-	canvas->delta_im = (canvas->max_im - canvas->min_im) / HEIGHT;
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -79,8 +79,8 @@ int	draw_julia(t_canvas *canvas)
 
 	canvas->c_re = 0.4;
 	canvas->c_im = -0.325;
-	canvas->delta_re = (canvas->max_re - canvas->min_re) / WIDTH;
-	canvas->delta_im = (canvas->max_im - canvas->min_im) / HEIGHT;
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
 	while (y < HEIGHT)
 	{
