@@ -35,7 +35,7 @@
 # define DEFAULT_JULIA_C_IM -0.325
 # define MOVE_RATIO 0.01
 
-typedef struct	s_img {
+typedef struct s_img {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
@@ -50,8 +50,8 @@ enum e_fractal_type {
 	FRACTAL_MANDELBROT,
 };
 
-typedef struct s_canvas t_canvas;
-typedef int (*t_fractal_drawer)(t_canvas*);
+typedef struct s_canvas	t_canvas;
+typedef int				(*t_fractal_drawer)(t_canvas *canvas);
 
 struct	s_canvas {
 	void				*mlx;
