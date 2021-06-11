@@ -15,8 +15,6 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->img.addr = mlx_get_data_addr(canvas->img.img,
 			&canvas->img.bits_per_pixel,
 			&canvas->img.line_length, &canvas->img.endian);
-	canvas->screen_height = HEIGHT;
-	canvas->screen_width = WIDTH;
 	canvas->max_re = 2;
 	canvas->max_im = 2;
 	canvas->min_re = -2;

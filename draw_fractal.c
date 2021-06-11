@@ -44,11 +44,11 @@ int	draw_mandelbrot(t_canvas *canvas)
 	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
 	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
-	while (y < canvas->screen_height)
+	while (y < HEIGHT)
 	{
 		canvas->c_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
-		while (x < canvas->screen_width)
+		while (x < WIDTH)
 		{
 			canvas->c_re = canvas->min_re + x * canvas->delta_re;
 			canvas->z_re = 0;
@@ -82,11 +82,11 @@ int	draw_julia(t_canvas *canvas)
 	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
 	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
-	while (y < canvas->screen_height)
+	while (y < HEIGHT)
 	{
 		canvas->z_im = canvas->max_im - y * canvas->delta_im;
 		x = 0;
-		while (x < canvas->screen_width)
+		while (x < WIDTH)
 		{
 			canvas->z_re = canvas->min_re + x * canvas->delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,

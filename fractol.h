@@ -25,8 +25,8 @@
 # define ZOOM_STEP 0.5
 # define THRESHOLD 2
 
-# define WIDTH 800.0
-# define HEIGHT 800.0
+# define WIDTH 800
+# define HEIGHT 800
 
 # define ABS(x) ((x) < 0 ? -1 * (x) : (x))
 
@@ -52,8 +52,6 @@ struct	s_canvas {
 	void				*mlx;
 	void				*win;
 	t_img				img;
-	int					screen_width;
-	int					screen_height;
 	// フラクタルの種類
 	t_fractal_drawer	fractal_drawer;
 	// mouse position
