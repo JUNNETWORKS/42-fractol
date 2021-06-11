@@ -6,6 +6,27 @@ int	key_press_hook(int keycode, t_canvas *canvas)
 		exit_canvas(canvas);
 	if (keycode == KEY_SHIFT)
 		canvas->is_pressed_shift = true;
+	if (keycode == KEY_UP_ARROW)
+	{
+		canvas->min_im += (canvas->max_im - canvas->min_im) * 0.1;
+		canvas->max_im += (canvas->max_im - canvas->min_im) * 0.1;
+	}
+	if (keycode == KEY_DW_ARROW)
+	{
+		canvas->min_im -= (canvas->max_im - canvas->min_im) * 0.1;
+		canvas->max_im -= (canvas->max_im - canvas->min_im) * 0.1;
+	}
+	if (keycode == KEY_R_ARROW)
+	{
+		canvas->min_re += (canvas->max_re - canvas->min_re) * 0.1;
+		canvas->max_re += (canvas->max_re - canvas->min_re) * 0.1;
+	}
+	if (keycode == KEY_L_ARROW)
+	{
+
+		canvas->min_re -= (canvas->max_re - canvas->min_re) * 0.1;
+		canvas->max_re -= (canvas->max_re - canvas->min_re) * 0.1;
+	}
 	return (0);
 }
 
