@@ -25,7 +25,7 @@ DEPS := ${SRCS:.c=.d}
 all: ${NAME}
 
 %.o: %.c
-	# -MMD -MP -MF で依存ファイルリスト生成
+	# flags -MMD -MP -MF for generating dependency files
 	$(CC) $(CFLAGS)  -MMD -MP -MF $(<:.c=.d) -c $< -o $@
 
 $(MLX_PATH):
