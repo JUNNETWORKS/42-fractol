@@ -18,13 +18,15 @@
 # define KEY_Q 113
 # define KEY_ESC 65307
 # define KEY_SHIFT 65505
+# define KEY_L_ARROW 65361
+# define KEY_UP_ARROW 65362
+# define KEY_R_ARROW 65363
+# define KEY_DW_ARROW 65364
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
 # define MOUSE_RIGHT 1
 # define MOUSE_CENTER 2
 # define MOUSE_LEFT 3
-# define ZOOM_STEP 0.5
-# define THRESHOLD 2
 
 # define WIDTH 800
 # define HEIGHT 800
