@@ -127,7 +127,8 @@ static uint32_t	get_color_in_burningship(t_canvas *canvas)
  *
  * If divergent, fill with black.
  *
- * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C (Z is an expression for a complex number)
+ * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C
+ *   (Z is an expression for a complex number)
  *
  * The difference from the Mandelbrot set is that
  *   in barningship we take absolute values in sequences of iterations.
