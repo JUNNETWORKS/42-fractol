@@ -38,7 +38,7 @@ uint32_t	hsv2hex(double h, double s, double v)
 	else if (h >= 60)
 		return (rgb2hex((x + m) * 255, (c + m) * 255, (0 + m) * 255));
 	else if (h >= 0)
-		return (rgb2hex((x + m) * 255, (x + m) * 255, (0 + m) * 255));
+		return (rgb2hex((c + m) * 255, (x + m) * 255, (0 + m) * 255));
 	else
 		return (rgb2hex((0 + m) * 255, (0 + m) * 255, (0 + m) * 255));
 }
