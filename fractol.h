@@ -85,8 +85,9 @@ int			key_release_hook(int keycode, t_canvas *canvas);
 int			mouse_hook(int button, int x, int y, t_canvas *canvas);
 
 // fracal
-int	draw_julia(t_canvas *canvas);
-int	draw_mandelbrot(t_canvas *canvas);
+int			draw_julia(t_canvas *canvas);
+int			draw_mandelbrot(t_canvas *canvas);
+int			draw_burningship(t_canvas *canvas);
 
 // color utils
 uint32_t	rgb2hex(int r, int g, int b);

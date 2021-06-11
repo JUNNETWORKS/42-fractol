@@ -96,3 +96,67 @@ int	draw_julia(t_canvas *canvas)
 	}
 	return (0);
 }
+
+static uint32_t	get_color_in_burningship(t_canvas *canvas)
+{
+	int		iteration;
+	int		color;
+	double	tmp_x;
+
+	iteration = 0;
+	while (canvas->z_re * canvas->z_re + canvas->z_im * canvas->z_im <= 4
+		&& iteration < canvas->max_iter)
+	{
+		canvas->z_re = ABS(canvas->z_re);
+		canvas->z_im = ABS(canvas->z_im);
+		tmp_x = canvas->z_re * canvas->z_re
+			- canvas->z_im * canvas->z_im + canvas->c_re;
+		canvas->z_im = 2 * canvas->z_re * canvas->z_im + canvas->c_im;
+		canvas->z_re = tmp_x;
+		iteration++;
+	}
+	if (iteration == canvas->max_iter)
+		color = rgb2hex(0, 0, 0);
+	else
+		color = hsv2hex(180, ((double)iteration / canvas->max_iter),
+				((double)iteration / canvas->max_iter));
+	return (color);
+}
+
+/*
+ * バーニングシップ集合を描画する.
+ * バーニングシップ集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
+ * Cは描画するピクセルの位置(縦横のピクセル数の相対)
+ * Z_0 は 0 にセットする
+ *
+ * 発散した時は黒色で塗りつぶす
+ *
+ * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C    (Zは複素数の式)
+ *
+ * マンデルブロ集合との違いとしては, バーニングシップでは絶対値を取っていることである.
+ */
+int	draw_burningship(t_canvas *canvas)
+{
+	int	x;
+	int	y;
+
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			canvas->c_im = canvas->max_im - y * canvas->delta_im;
+			canvas->c_re = canvas->min_re + x * canvas->delta_re;
+			canvas->z_re = 0;
+			canvas->z_im = 0;
+			my_mlx_pixel_put(&canvas->img, x, y,
+				get_color_in_burningship(canvas));
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}

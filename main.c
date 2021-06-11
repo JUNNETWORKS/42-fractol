@@ -59,6 +59,8 @@ bool	set_fractal_type(t_canvas *canvas, char *str)
 		canvas->fractal_drawer = draw_mandelbrot;
 	else if (!ft_strncmp(str, "julia", 6))
 		canvas->fractal_drawer = draw_julia;
+	else if (!ft_strncmp(str, "burningship", 12))
+		canvas->fractal_drawer = draw_burningship;
 	else
 		return (false);
 	return (true);
@@ -72,7 +74,8 @@ int	main(int argc, char **argv)
 	{
 		printf("You have to select fractal type\n"
 			"- mandelbrot\n"
-			"- julia\n");
+			"- julia\n"
+			"- burningship\n");
 		return (1);
 	}
 	initialize_canvas(&canvas);
