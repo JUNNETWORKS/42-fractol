@@ -20,11 +20,36 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->min_re = -2;
 	canvas->min_im = -2;
 	canvas->max_iter = 100;
+	// Julia集合用
+	canvas->c_re = 0.4;
+	canvas->c_im = -0.325;
+	canvas->is_pressed_shift = false;
+}
+
+void	update_fractal_c(t_canvas *canvas)
+{
+	int	x;
+	int	y;
+	double	mouse_re;
+	double	mouse_im;
+
+	mlx_mouse_get_pos(canvas->mlx, canvas->win, &x, &y);
+	if (!x && !y)
+		return ;
+	mouse_re = (double)x
+		/ (WIDTH / (canvas->max_re - canvas->min_re)) + canvas->min_re;
+	mouse_im = (double)y
+		/ (HEIGHT / (canvas->max_im - canvas->min_im)) * -1 + canvas->max_im;
+	canvas->c_re = mouse_re;
+	canvas->c_im = mouse_im;
 }
 
 int	main_loop(t_canvas *canvas)
 {
-	(void)canvas;
+	if (canvas->is_pressed_shift)
+		update_fractal_c(canvas);
+	canvas->fractal_drawer(canvas);
+	mlx_put_image_to_window(canvas->mlx, canvas->win, canvas->img.img, 0, 0);
 	return (0);
 }
 
@@ -54,6 +79,7 @@ int	main(int argc, char **argv)
 	canvas.fractal_drawer(&canvas);
 	mlx_put_image_to_window(canvas.mlx, canvas.win, canvas.img.img, 0, 0);
 	mlx_hook(canvas.win, KeyPress, KeyPressMask, key_press_hook, &canvas);
+	mlx_hook(canvas.win, KeyRelease, KeyReleaseMask, key_release_hook, &canvas);
 	mlx_hook(canvas.win, ClientMessage, 1L << 17, exit_canvas, &canvas);
 	mlx_mouse_hook(canvas.win, mouse_hook, &canvas);
 	mlx_loop_hook(canvas.mlx, &main_loop, &canvas);

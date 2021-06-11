@@ -17,6 +17,7 @@
 
 # define KEY_Q 113
 # define KEY_ESC 65307
+# define KEY_SHIFT 65505
 # define SCROLL_UP 5
 # define SCROLL_DOWN 4
 # define MOUSE_RIGHT 1
@@ -57,6 +58,8 @@ struct	s_canvas {
 	// mouse position
 	int					mouse_x;
 	int					mouse_y;
+	// Shiftキーが押されているか
+	bool				is_pressed_shift;
 	double				min_re;
 	double				min_im;
 	double				max_re;
@@ -78,6 +81,7 @@ void		initialize_canvas(t_canvas *canvas);
 uint32_t	get_color(t_img img, int x, int y);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int			key_press_hook(int keycode, t_canvas *canvas);
+int			key_release_hook(int keycode, t_canvas *canvas);
 int			mouse_hook(int button, int x, int y, t_canvas *canvas);
 
 // fracal

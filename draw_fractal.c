@@ -77,11 +77,10 @@ int	draw_julia(t_canvas *canvas)
 	int	x;
 	int	y;
 
-	canvas->c_re = 0.4;
-	canvas->c_im = -0.325;
 	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
 	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
 	y = 0;
+	printf("C=%+f%+fj\n", canvas->c_re, canvas->c_im);
 	while (y < HEIGHT)
 	{
 		x = 0;
