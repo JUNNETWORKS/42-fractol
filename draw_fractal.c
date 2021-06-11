@@ -25,17 +25,17 @@ static uint32_t	get_color_in_fractal(t_canvas *canvas)
 }
 
 /*
- * マンデルブロ集合を描画する.
- * マンデルブロ集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
- * Cは描画するピクセルの位置(縦横のピクセル数の相対)
- * Z_0 は 0 にセットする
+ * Draw the Mandelbrot set.
+ * A Mandelbrot set is a set that does not diverge when z_n = z_(n-1) + C.
+ * C is the position of the pixel to be drawn.
+ * Z_0 should be set to 0.
  *
- * 発散した時は黒色で塗りつぶす
+ * If divergence occurs, fill with black
  *
- * メモ
- * Z_(n+1) = Z_n ^ 2 + C    (Zは複素数の式)
- * (a + bj)^2 = a^2 + 2abj - b^2
- */
+ * Memo:
+ *   Z_(n+1) = Z_n ^ 2 + C (Z is an expression for a complex number)
+ *   (a + bj)^2 = a^2 + 2abj - b^2
+*/
 int	draw_mandelbrot(t_canvas *canvas)
 {
 	int	x;
@@ -63,14 +63,12 @@ int	draw_mandelbrot(t_canvas *canvas)
 }
 
 /*
- * ジュリア集合を描画する.
- * ジュリア集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
- * Cは複素数の定数(全てのピクセルにおいて同じ数字を使う)
- * Z_0 は描画するピクセルの位置(縦横のピクセル数の相対)
+ * Draw the Julia set.
+ * The Julia set is the set that does not diverge when z_n = z_(n-1) + C.
+ * C is a complex constant (the same number is used for all pixels).
+ * Z_0 is the position of the pixel to be drawn.
  *
- * 発散した時は黒色で塗りつぶす.
- *
- * C を自由に変えれるようにできれば面白そう
+ * If divergence occurs, it is filled with black.
  */
 int	draw_julia(t_canvas *canvas)
 {
@@ -122,16 +120,17 @@ static uint32_t	get_color_in_burningship(t_canvas *canvas)
 }
 
 /*
- * バーニングシップ集合を描画する.
- * バーニングシップ集合とは z_n = z_(n-1) + C とした時に発散しない集合のこと.
- * Cは描画するピクセルの位置(縦横のピクセル数の相対)
- * Z_0 は 0 にセットする
+ * Draw the burningship set.
+ * A burning ship set is a set that does not diverge when z_n = z_(n-1) + C.
+ * C is the position of the pixel to be drawn.
+ * Z_0 should be set to 0
  *
- * 発散した時は黒色で塗りつぶす
+ * If divergent, fill with black.
  *
- * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C    (Zは複素数の式)
+ * Z_(n+1) = (abs(z_re) + abs(z_im)j) ^ 2 + C (Z is an expression for a complex number)
  *
- * マンデルブロ集合との違いとしては, バーニングシップでは絶対値を取っていることである.
+ * The difference from the Mandelbrot set is that
+ *   in barningship we take absolute values in sequences of iterations.
  */
 int	draw_burningship(t_canvas *canvas)
 {
