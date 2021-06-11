@@ -41,8 +41,8 @@ int	draw_mandelbrot(t_canvas *canvas)
 	int	x;
 	int	y;
 
-	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
-	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / WIDTH;
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -79,8 +79,8 @@ int	draw_julia(t_canvas *canvas)
 
 	canvas->c_re = 0.4;
 	canvas->c_im = -0.325;
-	canvas->delta_re = (canvas->max_re - canvas->min_re) / (WIDTH - 1);
-	canvas->delta_im = (canvas->max_im - canvas->min_im) / (HEIGHT - 1);
+	canvas->delta_re = (canvas->max_re - canvas->min_re) / WIDTH;
+	canvas->delta_im = (canvas->max_im - canvas->min_im) / HEIGHT;
 	y = 0;
 	while (y < HEIGHT)
 	{
