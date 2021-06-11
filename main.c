@@ -19,10 +19,9 @@ void	initialize_canvas(t_canvas *canvas)
 	canvas->max_im = 2;
 	canvas->min_re = -2;
 	canvas->min_im = -2;
-	canvas->max_iter = 100;
-	// Julia集合用
-	canvas->c_re = 0.4;
-	canvas->c_im = -0.325;
+	canvas->max_iter = DEFAULT_MAX_ITER;
+	canvas->c_re = DEFAULT_JULIA_C_RE;
+	canvas->c_im = DEFAULT_JULIA_C_IM;
 	canvas->is_pressed_shift = false;
 }
 

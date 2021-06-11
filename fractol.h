@@ -28,6 +28,9 @@
 
 # define WIDTH 800
 # define HEIGHT 800
+# define DEFAULT_MAX_ITER 100
+# define DEFAULT_JULIA_C_RE 0.4
+# define DEFAULT_JULIA_C_IM -0.325
 
 # define ABS(x) ((x) < 0 ? -1 * (x) : (x))
 
