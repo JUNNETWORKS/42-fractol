@@ -4,13 +4,13 @@ void	move_arrow_key(int keycode, t_canvas *canvas)
 {
 	if (keycode == KEY_UP_ARROW)
 	{
-		canvas->min_im += (canvas->max_im - canvas->min_im) * MOVE_RATIO;
-		canvas->max_im += (canvas->max_im - canvas->min_im) * MOVE_RATIO;
+		canvas->min_im -= (canvas->max_im - canvas->min_im) * MOVE_RATIO;
+		canvas->max_im -= (canvas->max_im - canvas->min_im) * MOVE_RATIO;
 	}
 	if (keycode == KEY_DW_ARROW)
 	{
-		canvas->min_im -= (canvas->max_im - canvas->min_im) * MOVE_RATIO;
-		canvas->max_im -= (canvas->max_im - canvas->min_im) * MOVE_RATIO;
+		canvas->min_im += (canvas->max_im - canvas->min_im) * MOVE_RATIO;
+		canvas->max_im += (canvas->max_im - canvas->min_im) * MOVE_RATIO;
 	}
 	if (keycode == KEY_R_ARROW)
 	{

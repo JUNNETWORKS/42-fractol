@@ -14,7 +14,7 @@ static void	zoom_canvas(t_canvas *canvas, int button, int x, int y)
 	mouse_re = (double)x
 		/ (WIDTH / (canvas->max_re - canvas->min_re)) + canvas->min_re;
 	mouse_im = (double)y
-		/ (HEIGHT / (canvas->max_im - canvas->min_im)) * -1 + canvas->max_im;
+		/ (HEIGHT / (canvas->max_im - canvas->min_im)) + canvas->min_im;
 	if (button == SCROLL_UP)
 	{
 		if (canvas->max_iter > 4)

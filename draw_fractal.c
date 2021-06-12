@@ -49,7 +49,7 @@ int	draw_mandelbrot(t_canvas *canvas)
 		x = 0;
 		while (x < WIDTH)
 		{
-			canvas->c_im = canvas->max_im - y * canvas->delta_im;
+			canvas->c_im = canvas->min_im + y * canvas->delta_im;
 			canvas->c_re = canvas->min_re + x * canvas->delta_re;
 			canvas->z_re = 0;
 			canvas->z_im = 0;
@@ -83,7 +83,7 @@ int	draw_julia(t_canvas *canvas)
 		x = 0;
 		while (x < WIDTH)
 		{
-			canvas->z_im = canvas->max_im - y * canvas->delta_im;
+			canvas->z_im = canvas->min_im + y * canvas->delta_im;
 			canvas->z_re = canvas->min_re + x * canvas->delta_re;
 			my_mlx_pixel_put(&canvas->img, x, y,
 				get_color_in_fractal(canvas));
@@ -146,7 +146,7 @@ int	draw_burningship(t_canvas *canvas)
 		x = 0;
 		while (x < WIDTH)
 		{
-			canvas->c_im = canvas->max_im - y * canvas->delta_im;
+			canvas->c_im = canvas->min_im + y * canvas->delta_im;
 			canvas->c_re = canvas->min_re + x * canvas->delta_re;
 			canvas->z_re = 0;
 			canvas->z_im = 0;
