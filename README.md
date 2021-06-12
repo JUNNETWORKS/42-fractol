@@ -1,6 +1,6 @@
 # Fractol
 
-Fractol is one project of 42 cursus.
+Fractol is one of the projects in 42 cursus.
 
 ## References
 
