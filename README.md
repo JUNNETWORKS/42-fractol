@@ -1,6 +1,14 @@
 # Fractol
 
-Fractol is one project of 42 cursus.
+Fractol is one of the projects in 42 cursus.
+
+![Peek 2021-06-11 19-48](https://user-images.githubusercontent.com/26608037/121676176-4ba48600-caef-11eb-901c-ffa427d6c0a3.gif)
+
+![Peek 2021-06-12 14-29](https://user-images.githubusercontent.com/26608037/121766483-f454f300-cb8c-11eb-8718-dca049b76985.gif)
+
+![Peek 2021-06-12 15-51](https://user-images.githubusercontent.com/26608037/121768051-03d93980-cb97-11eb-9252-adf67edd0b29.gif)
+
+
 
 ## References
 
